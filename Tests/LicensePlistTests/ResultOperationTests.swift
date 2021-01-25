@@ -6,9 +6,9 @@ import XCTest
 
 class ResultOperatoinTests: XCTestCase {
     func testBlocking() {
-        let operation = ResultOperation<String, NSError> { _ in
-            Result(value: "hello")
+        let operation = ResultOperation<String, Error> { _ in
+            Result.success("Test")
         }
-        XCTAssertEqual(operation.resultSync().value!, "hello")
+        XCTAssertEqual(try! operation.resultSync().get(), "Test")
     }
 }

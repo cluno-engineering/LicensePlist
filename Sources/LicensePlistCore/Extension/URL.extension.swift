@@ -28,7 +28,6 @@ public extension LicensePlistExtension where Base == URL {
 
     func read() -> String? {
         if !isExists {
-            Log.warning("Not found: \(base).")
             return nil
         }
         return getResultOrDefault {

@@ -11,7 +11,6 @@ public class ResultOperation<T, E: Error>: Operation {
 
     override public func main() {
         if isCancelled {
-            Log.debug("cancelled")
             return
         }
         result = closure(self)

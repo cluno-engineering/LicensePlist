@@ -10,7 +10,7 @@ class TestUtil {
             GitHubAuthorization.shared.token = try String(contentsOf: url,
                                                           encoding: String.Encoding.utf8)
         } catch {
-            Log.warning("\(url) not found. You can execute without github_token, but API limit will exceed sometimes.")
+            debugPrint(error.localizedDescription)
         }
     }
 }

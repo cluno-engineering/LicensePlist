@@ -6,6 +6,7 @@ import XCTest
 class URLExtensionTests: XCTestCase {
     func testDownloadContent() {
         let url = URL(string: "https://raw.githubusercontent.com/mono0926/LicensePlist/master/LICENSE")!
-        XCTAssertTrue(url.lp.download().resultSync().value!.hasPrefix("MIT License"))
+        let license = try! url.lp.download().resultSync().get()
+        XCTAssertTrue(license.hasPrefix("MIT License"))
     }
 }

@@ -4,7 +4,6 @@ import LoggerAPI
 public enum Logger {
     public static func configure() {
         let logger = createDefaultLogger()
-//        let logger = createDebugLogger()
         logger.colored = true
         Log.logger = logger
     }

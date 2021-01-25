@@ -29,22 +29,11 @@ struct PlistInfo {
     }
 
     mutating func loadGitHubLibraries(file: GitHubLibraryConfigFile) {
-        switch file.type {
-        case .carthage:
-            Log.info("Carthage License collect start")
-        case .mint:
-            Log.info("Mint License collect start")
-        case .licensePlist:
-            // should not reach here
-            preconditionFailure()
-        }
         let githubs = GitHub.load(file, renames: options.config.renames)
         githubLibraries = ((githubLibraries ?? []) + options.config.apply(githubs: githubs)).sorted()
     }
 
     mutating func loadSwiftPackageLibraries(packageFile: String?) {
-        Log.info("Swift Package Manager License collect start")
-
         let packages = SwiftPackage.loadPackages(packageFile ?? "")
         let packagesAsGithubLibraries = packages.compactMap { $0.toGitHub(renames: options.config.renames) }.sorted()
 
@@ -52,7 +41,6 @@ struct PlistInfo {
     }
 
     mutating func loadManualLibraries() {
-        Log.info("Manual License start")
         manualLicenses = ManualLicense.load(options.config.manuals).sorted()
     }
 
@@ -70,7 +58,6 @@ struct PlistInfo {
             .joined(separator: "\n\n")
         let savePath = options.outputPath.appendingPathComponent("\(options.prefix).latest_result.txt")
         if let previous = savePath.lp.read(), previous == contents, !config.force {
-            Log.warning("Completed because no diff. You can execute force by `--force` flag.")
             exit(0)
         }
         summary = contents
@@ -113,10 +100,9 @@ struct PlistInfo {
         let outputPath = options.outputPath
         let itemsPath = outputPath.appendingPathComponent(options.prefix)
         if itemsPath.lp.deleteIfExits() {
-            Log.info("Deleted exiting plist within \(options.prefix)")
+            debugPrint("Deleted exiting plist within \(options.prefix)")
         }
         itemsPath.lp.createDirectory()
-        Log.info("Directory created: \(outputPath)")
 
         let holder = options.config.singlePage ?
             LicensePlistHolder.loadAllToRoot(licenses: licenses) :
@@ -137,14 +123,12 @@ struct PlistInfo {
     func reportMissings() {
         guard let githubLibraries = githubLibraries, let licenses = licenses else { preconditionFailure() }
 
-        Log.info("----------Result-----------")
-        Log.info("# Missing license:")
         let missing = Set(githubLibraries.map { $0.name }).subtracting(Set(licenses.map { $0.name }))
         if missing.isEmpty {
-            Log.info("None 🎉")
             return
         }
 
+        Log.warning("Missing licenses:")
         Array(missing).sorted { $0 < $1 }.forEach { Log.warning($0) }
         if options.config.failIfMissingLicense {
             exit(1)
@@ -159,7 +143,7 @@ struct PlistInfo {
         do {
             try summary.write(to: summaryPath, atomically: true, encoding: Consts.encoding)
         } catch let e {
-            Log.error("Failed to save summary. Error: \(String(describing: e))")
+            debugPrint(e.localizedDescription)
         }
     }
 }
