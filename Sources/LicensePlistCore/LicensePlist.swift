@@ -9,10 +9,10 @@ public final class LicensePlist {
         GitHubAuthorization.shared.token = options.gitHubToken
         var info = PlistInfo(options: options)
         info.loadCocoaPodsLicense(acknowledgements: readPodsAcknowledgements(path: options.podsPath))
-        info.loadGitHubLibraries(file: readCartfile(path: options.cartfilePath))
-        info.loadGitHubLibraries(file: readMintfile(path: options.mintfilePath))
+//        info.loadGitHubLibraries(file: readCartfile(path: options.cartfilePath))
+//        info.loadGitHubLibraries(file: readMintfile(path: options.mintfilePath))
         info.loadSwiftPackageLibraries(packageFile: readSwiftPackages(path: options.packagePath) ?? readXcodeProject(path: options.xcodeprojPath))
-        info.loadManualLibraries()
+//        info.loadManualLibraries()
         info.compareWithLatestSummary()
         info.downloadGitHubLicenses()
         info.collectLicenseInfos()
