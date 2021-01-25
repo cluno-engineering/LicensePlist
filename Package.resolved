@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/ishkawa/APIKit.git",
         "state": {
           "branch": null,
-          "revision": "86d51ecee0bc0ebdb53fb69b11a24169a69097ba",
-          "version": "4.1.0"
+          "revision": "f24f05616f8972fec937c2f069491468a8fabf85",
+          "version": "5.1.0"
         }
       },
       {
@@ -26,15 +26,6 @@
           "branch": null,
           "revision": "3357dd9526cdf9436fa63bb792b669e6efdc43da",
           "version": "1.9.0"
-        }
-      },
-      {
-        "package": "Result",
-        "repositoryURL": "https://github.com/antitypical/Result.git",
-        "state": {
-          "branch": null,
-          "revision": "2ca499ba456795616fbc471561ff1d963e6ae160",
-          "version": "4.1.0"
         }
       },
       {

@@ -1,12 +1,12 @@
 import Foundation
-import XCTest
 @testable import LicensePlistCore
+import XCTest
 
 class ConfigTests: XCTestCase {
-
     func testInit_empty_yaml() {
         XCTAssertEqual(Config(yaml: "", configBasePath: URL(fileURLWithPath: "")), Config(githubs: [], manuals: [], excludes: [], renames: [:]))
     }
+
     func testInit_sample() {
         let url = URL(string: "https://raw.githubusercontent.com/mono0926/LicensePlist/master/Tests/LicensePlistTests/Resources/license_plist.yml")!
         XCTAssertEqual(Config(yaml: url.lp.download().resultSync().value!, configBasePath: url.deletingLastPathComponent()),

@@ -1,10 +1,9 @@
-import Foundation
-import XCTest
 import APIKit
+import Foundation
 @testable import LicensePlistCore
+import XCTest
 
 class GitHubLicenseTests: XCTestCase {
-
     override class func setUp() {
         super.setUp()
         TestUtil.setGitHubToken()
@@ -25,6 +24,7 @@ class GitHubLicenseTests: XCTestCase {
         XCTAssertTrue(license.body.hasPrefix("The MIT License (MIT)"))
         XCTAssertEqual(license.githubResponse.kind.spdxId, "MIT")
     }
+
     func testCollect_invalid() {
         let carthage = GitHub(name: "abcde", nameSpecified: nil, owner: "invalid", version: nil)
         let license = GitHubLicense.download(carthage).result

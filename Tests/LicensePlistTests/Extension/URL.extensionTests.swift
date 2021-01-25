@@ -1,7 +1,7 @@
-import Foundation
-import XCTest
 import APIKit
+import Foundation
 @testable import LicensePlistCore
+import XCTest
 
 class URLExtensionTests: XCTestCase {
     func testDownloadContent() {
