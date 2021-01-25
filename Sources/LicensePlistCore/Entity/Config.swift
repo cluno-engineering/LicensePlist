@@ -101,7 +101,6 @@ public struct Config {
     }
 
     func apply(githubs: [GitHub]) -> [GitHub] {
-        self.githubs.forEach { Log.warning("\($0.name) was loaded from config YAML.") }
         return filterExcluded(self.githubs + githubs)
     }
 

@@ -22,7 +22,6 @@ public extension GitHubLicense {
     static func download(_ library: GitHub) -> ResultOperation<GitHubLicense, DownloadError> {
         let owner = library.owner
         let name = library.name
-        Log.info("license download start(owner: \(owner), name: \(name))")
         return ResultOperation<GitHubLicense, DownloadError> { _ in
             let result = Session.shared.lp.sendSync(RepoRequests.License(owner: owner, repo: name))
             switch result {
