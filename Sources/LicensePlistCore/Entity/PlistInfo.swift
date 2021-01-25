@@ -17,7 +17,6 @@ struct PlistInfo {
 
     mutating func loadCocoaPodsLicense(acknowledgements: [String]) {
         guard cocoaPodsLicenses == nil else { preconditionFailure() }
-        Log.info("Pods License parse start")
 
         let versionPath = options.podsPath.appendingPathComponent("Manifest.lock")
         let podsVersionInfo = VersionInfo(podsManifest: versionPath.lp.read() ?? "")
