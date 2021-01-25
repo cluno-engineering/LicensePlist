@@ -8,9 +8,6 @@ build:
 test:
 	swift test
 
-lint:
-	swiftlint
-
 clean:
 	swift package clean
 
